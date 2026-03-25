@@ -20,13 +20,14 @@ CAPTURES_DIR.mkdir(exist_ok=True)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_origin_regex=r"http://.*:5173",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 analyzer = FaceAnalyzer()
-app.mount("/captures", StaticFiles(directory=CAPTURES_DIR), name="captures")
+app.mount("/images", StaticFiles(directory=CAPTURES_DIR), name="captures")
 
 
 class CapturePayload(BaseModel):
@@ -63,7 +64,7 @@ async def save_capture(payload: CapturePayload):
 
     return {
         "filename": filename,
-        "url": f"http://localhost:8001/captures/{filename}",
+        "url": f"http://localhost:8001/images/{filename}",
     }
 
 @app.websocket("/ws")
