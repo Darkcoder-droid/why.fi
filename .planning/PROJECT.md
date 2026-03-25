@@ -24,10 +24,11 @@ A highly interactive, absurd, and satisfying "emotion audition machine" that tur
 - ✓ Implement captured successful photos gallery/strip (Validated in Phase 1)
 - ✓ Add game-like motion (target changes, detected changes, match confirmation, cooldown, score updates, final reveal) (Validated in Phase 1)
 - ✓ Ensure the layout works seamlessly on both desktop and laptop webcams without feeling like a generic dashboard (Validated in Phase 1)
+- ✓ Redesign final judgment / results screen with average scores and captured evidence (Validated in Phase 2: results-screen-polish)
 
 ### Active
 
-- [ ] Redesign final judgment / results screen with average scores and captured evidence
+(No active requirements remaining for Milestone 1)
 
 ### Out of Scope
 
@@ -50,7 +51,7 @@ The user wants to transform a functional webcam emotion app into a polished, hum
 | Use a pixel-art / meme-control-room aesthetic | Strengthens the absurd, chaotic, internet-native concept of the game. | — Pending |
 
 ---
-*Last updated: 2026-03-25 after Phase 1 completion*
+*Last updated: 2026-03-25 after Phase 2 completion*
 
 ## Evolution
 

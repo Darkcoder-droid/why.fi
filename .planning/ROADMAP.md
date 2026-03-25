@@ -6,12 +6,12 @@
 
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|------------------|
-| 1 | Gameplay UI Overhaul | Redesign the main gameplay screen with a funny, pixel-art aesthetic and ensure all components (camera, metrics, meme board) are well-structured. | UI-01, UI-02, UI-03, UI-04, UI-05, UI-06, UX-01, UX-02, UX-03, UX-04, SCR-01 | 4 |
-| 2 | Results Screen & Polish | Design and implement the final results screen and polish all animations and state transitions for a complete arcade feel. | SCR-02 | 3 |
+| 1 | Gameplay UI Overhaul | Redesign the main gameplay screen with a funny, pixel-art aesthetic and ensure all components (camera, metrics, meme board) are well-structured. | Complete    | 2026-03-25 |
+| 2 | Results Screen & Polish | Design and implement the final results screen and polish all animations and state transitions for a complete arcade feel. | Complete    | 2026-03-25 |
 
 ### Phase Details
 
-**Phase 1: Gameplay UI Overhaul**
+## Phase 1: Gameplay UI Overhaul
 Goal: Redesign the main gameplay screen with a funny, pixel-art aesthetic and ensure all components are well-structured.
 Requirements: UI-01, UI-02, UI-03, UI-04, UI-05, UI-06, UX-01, UX-02, UX-03, UX-04, SCR-01
 **UI hint:** yes
@@ -21,7 +21,7 @@ Success criteria:
 3. The meme board and target expression modules clearly update in real-time.
 4. Smooth gameplay transitions exist (match confirmation and cooldown).
 
-**Phase 2: Results Screen & Polish**
+## Phase 2: Results Screen & Polish
 Goal: Design and implement the final results screen and polish all animations and state transitions for a complete arcade feel.
 Requirements: SCR-02
 **UI hint:** yes
