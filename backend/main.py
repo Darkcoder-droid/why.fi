@@ -17,7 +17,7 @@ except ImportError:
 CAPTURES_DIR = Path(__file__).resolve().parent / "captures"
 CAPTURES_DIR.mkdir(exist_ok=True)
 
-analyzer = FaceAnalyzer()
+analyzer: FaceAnalyzer | None = None
 
 
 def _get_allowed_origins() -> list[str]:
@@ -57,6 +57,15 @@ def create_app() -> FastAPI:
 app = create_app()
 
 
+def get_analyzer() -> FaceAnalyzer:
+    global analyzer
+
+    if analyzer is None:
+        analyzer = FaceAnalyzer()
+
+    return analyzer
+
+
 class CapturePayload(BaseModel):
     image: str
     expression: str
@@ -66,7 +75,7 @@ class CapturePayload(BaseModel):
 @app.get("/health")
 @app.get("/api/health")
 def health():
-    analyzer_status = analyzer.get_status()
+    analyzer_status = get_analyzer().get_status()
     return {
         "status": "ok" if analyzer_status["ready"] else "degraded",
         "analyzer": analyzer_status,
@@ -102,10 +111,11 @@ async def save_capture(payload: CapturePayload, request: Request):
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     try:
+        live_analyzer = get_analyzer()
         while True:
             data = await websocket.receive_text()
             # Process frame asynchronously to avoid blocking the event loop
-            result = await asyncio.to_thread(analyzer.process_frame, data)
+            result = await asyncio.to_thread(live_analyzer.process_frame, data)
             if result:
                 await websocket.send_json(result)
             else:
