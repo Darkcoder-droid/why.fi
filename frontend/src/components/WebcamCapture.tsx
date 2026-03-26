@@ -874,10 +874,13 @@ const WebcamCapture: React.FC = () => {
 
   if (isFree) {
     return (
-      <div className="splash-screen">
-        <div className="splash-content">
-          <h1>YOU ARE FREE.</h1>
-          <p>The simulation has ended. Your captured evidence remains on the server.</p>
+      <div className="webcam-shell">
+        <div className="crt-overlay"></div>
+        <div className="splash-screen">
+          <div className="splash-content">
+            <h1>YOU ARE FREE.</h1>
+            <p>The simulation has ended. Your captured evidence remains on the server.</p>
+          </div>
         </div>
       </div>
     );
@@ -885,54 +888,57 @@ const WebcamCapture: React.FC = () => {
 
   if (isComplete) {
     return (
-      <div className="results-screen">
-        <div className="results-panel">
-          <h2>Final Judgment</h2>
-          <p className="results-summary">
-            Five captures survived inspection. Average Why score: {averageWhyScore}%.
-          </p>
+      <div className="webcam-shell">
+        <div className="crt-overlay"></div>
+        <div className="results-screen">
+          <div className="results-panel">
+            <h2>Final Judgment</h2>
+            <p className="results-summary">
+              Five captures survived inspection. Average Why score: {averageWhyScore}%.
+            </p>
 
-          <div className="metrics-grid">
-            <div className="metric-card">
-              <span>Why</span>
-              <strong>{averageWhyScore}%</strong>
+            <div className="metrics-grid">
+              <div className="metric-card">
+                <span>Why</span>
+                <strong>{averageWhyScore}%</strong>
+              </div>
+              <div className="metric-card">
+                <span>Boredom</span>
+                <strong>{averageBoredom}%</strong>
+              </div>
+              <div className="metric-card">
+                <span>Confusion</span>
+                <strong>{averageConfusion}%</strong>
+              </div>
+              <div className="metric-card">
+                <span>Dread</span>
+                <strong>{averageDread}%</strong>
+              </div>
+              <div className="metric-card">
+                <span>Last Face</span>
+                <strong>{getEmojiChar(currentEmoji)} {getEmojiLabel(currentEmoji)}</strong>
+              </div>
             </div>
-            <div className="metric-card">
-              <span>Boredom</span>
-              <strong>{averageBoredom}%</strong>
+
+            <div className="capture-grid">
+              {captures.map((capture, index) => (
+                <article className="capture-card" key={`${capture.expression}-${index}`}>
+                  <img src={capture.imageUrl} alt={`${capture.expression} capture ${index + 1}`} />
+                  <div className="capture-card-body">
+                    <h3>
+                      {capture.emojiChar} {capture.expression}
+                    </h3>
+                    <p>Why {Math.round(capture.whyMeter.why_score)}%</p>
+                    <p>B {Math.round(capture.whyMeter.boredom)} / C {Math.round(capture.whyMeter.confusion)} / D {Math.round(capture.whyMeter.dread)}</p>
+                  </div>
+                </article>
+              ))}
             </div>
-            <div className="metric-card">
-              <span>Confusion</span>
-              <strong>{averageConfusion}%</strong>
-            </div>
-            <div className="metric-card">
-              <span>Dread</span>
-              <strong>{averageDread}%</strong>
-            </div>
-            <div className="metric-card">
-              <span>Last Face</span>
-              <strong>{getEmojiChar(currentEmoji)} {getEmojiLabel(currentEmoji)}</strong>
-            </div>
+
+            <button className="quit-btn" onClick={() => void handleQuit()}>
+              EXIT SIMULATION
+            </button>
           </div>
-
-          <div className="capture-grid">
-            {captures.map((capture, index) => (
-              <article className="capture-card" key={`${capture.expression}-${index}`}>
-                <img src={capture.imageUrl} alt={`${capture.expression} capture ${index + 1}`} />
-                <div className="capture-card-body">
-                  <h3>
-                    {capture.emojiChar} {capture.expression}
-                  </h3>
-                  <p>Why {Math.round(capture.whyMeter.why_score)}%</p>
-                  <p>B {Math.round(capture.whyMeter.boredom)} / C {Math.round(capture.whyMeter.confusion)} / D {Math.round(capture.whyMeter.dread)}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <button className="quit-btn" onClick={() => void handleQuit()}>
-            EXIT SIMULATION
-          </button>
         </div>
       </div>
     );
@@ -940,12 +946,13 @@ const WebcamCapture: React.FC = () => {
 
   return (
     <div className="webcam-shell">
+      <div className="crt-overlay"></div>
       {error ? (
         <p className="error">{error}</p>
       ) : null}
 
       <div className="overlay-container">
-        <div className="video-stage">
+        <div className={`video-stage ${isCooldown ? 'match-success-flash' : ''}`}>
           <div className="stage-summary">
             <div className="summary-pill">
               <span>Step</span>
@@ -971,6 +978,15 @@ const WebcamCapture: React.FC = () => {
         </div>
 
         <div className="side-panel">
+          
+
+          <section className="panel-section">
+            <div className="panel-heading">
+              <h3>Meme Board</h3>
+              <p>The board snaps to the detected face so the meme image and sound stay on the same reaction.</p>
+            </div>
+            <canvas ref={memeCanvasRef} width={420} height={300} className="meme-canvas" />
+          </section>
           <section className="panel-section">
             <div className="panel-heading">
               <h3>Live Analysis</h3>
@@ -984,14 +1000,6 @@ const WebcamCapture: React.FC = () => {
                 </article>
               ))}
             </div>
-          </section>
-
-          <section className="panel-section">
-            <div className="panel-heading">
-              <h3>Meme Board</h3>
-              <p>The board snaps to the detected face so the meme image and sound stay on the same reaction.</p>
-            </div>
-            <canvas ref={memeCanvasRef} width={420} height={300} className="meme-canvas" />
           </section>
 
           <section className="panel-section">
