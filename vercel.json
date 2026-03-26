@@ -1,12 +1,13 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "framework": "vite",
   "installCommand": "cd frontend && npm ci",
   "buildCommand": "cd frontend && npm run build",
   "outputDirectory": "frontend/dist",
   "functions": {
-    "backend/main.py": {
-      "runtime": "python3.12"
+    "backend/*.py": {
+      "excludeFiles": "{frontend/**,.git/**,node_modules/**}"
     }
   },
   "rewrites": [

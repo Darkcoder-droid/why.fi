@@ -12,6 +12,7 @@ This repo is now configured to deploy as one Vercel project:
 - The frontend uses same-origin API paths in production, so the browser talks to the backend through the same Vercel domain.
 
 The repo-level Vercel config lives in [vercel.json](/home/sonukumar/Documents/projects/why.fi/vercel.json).
+Python version is pinned with [.python-version](/home/sonukumar/Documents/projects/why.fi/.python-version).
 
 ## How to deploy on Vercel
 
