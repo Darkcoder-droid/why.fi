@@ -28,15 +28,39 @@ why.fi is a fullstack web application that delivers robust APIs and machine lear
 
 *Note: AI Agents must use these exact commands when operating in this repository.*
 
-<!-- AUDIT: Rewrite installation for end-to-end reproducibility -->
 ### Installation
-```bash
-# Frontend
-cd frontend && npm install
 
-# Backend
-cd backend && pip install -r requirements.txt && pip install -r requirements-test.txt
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/notysozu/why.fi.git
+   cd why.fi
+   ```
+
+2. **Set up the Frontend:**
+   ```bash
+   cd frontend
+   npm install
+   cd ..
+   ```
+
+3. **Set up the Backend:**
+   ```bash
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   pip install -r requirements-test.txt
+   cd ..
+   ```
+
+4. **Verify Installation:**
+   ```bash
+   # Verify frontend dependencies
+   cd frontend && npm list vite
+   
+   # Verify backend dependencies
+   cd ../backend && python -c "import fastapi; print('FastAPI installed')"
+   ```
 
 ### Development
 ```bash
