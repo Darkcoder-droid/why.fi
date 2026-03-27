@@ -25,3 +25,5 @@ Write-Host "→ Configuring environment..."
 if (-Not (Test-Path ".env") -and (Test-Path ".env.example")) {
     Copy-Item .env.example .env
 }
+Write-Host "→ Building project..."
+if (Test-Path "frontend") { Set-Location frontend; npm run build; Set-Location .. }
