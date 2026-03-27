@@ -142,7 +142,33 @@ cd backend && find . -type d -name "__pycache__" -exec rm -r {} +
 
 ---
 
-<!-- AUDIT: Missing Usage examples -->
+## Usage
+
+To start using why.fi locally, launch both the frontend and backend development servers.
+
+1. **Start the Backend API:**
+   ```bash
+   cd backend
+   source venv/bin/activate
+   fastapi dev main.py
+   ```
+   *The API will be available at `http://localhost:8000`.*
+
+2. **Start the Frontend Client:**
+   ```bash
+   cd frontend
+   npm run dev
+   ```
+   *The web interface will start automatically via Vite on `http://localhost:5173`.*
+
+<!-- TODO: add demo GIF -->
+
+### API Example
+You can quickly test the health of the backend directly via `curl`:
+```bash
+curl -X GET "http://localhost:8000/api/health" \
+     -H "Accept: application/json"
+```
 <!-- AUDIT: Missing Configuration section (if applicable) -->
 <!-- AUDIT: Missing Project Structure tree -->
 <!-- AUDIT: Missing Roadmap & Status -->
