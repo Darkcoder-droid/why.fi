@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 DETECTED_OS="unknown"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
