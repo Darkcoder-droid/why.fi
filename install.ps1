@@ -11,3 +11,13 @@ if (-Not (Test-Path "why.fi") -and -Not (Test-Path "frontend")) {
     git clone https://github.com/notysozu/why.fi.git
     Set-Location why.fi
 }
+Write-Host "→ Setting up project dependencies..."
+if (Test-Path "frontend") { Set-Location frontend; npm install; Set-Location .. }
+if (Test-Path "backend") {
+    Set-Location backend
+    python -m venv venv
+    .\venv\Scripts\activate.ps1
+    pip install -r requirements.txt
+    pip install -r requirements-test.txt
+    Set-Location ..
+}
